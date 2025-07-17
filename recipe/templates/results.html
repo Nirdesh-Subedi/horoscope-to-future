@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Horoscope Results | Horoscope To Future</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="animated fadeInDown">
+            <div class="logo">
+                <i class="fas fa-star"></i>
+                <h1>Horoscope To Future</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="/chat"><i class="fas fa-comments"></i> AI Chat</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-chart-pie"></i> Results</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="results-page animated fadeIn">
+            <div class="results-header">
+                <h2><i class="fas fa-user-astronaut"></i> Your Cosmic Profile</h2>
+                <p>Generated on <span id="current-date"></span> based on your birth details</p>
+            </div>
+            
+            <div class="results-tabs">
+                <button class="tab-btn active" data-tab="overview">Overview</button>
+                <button class="tab-btn" data-tab="kundali">Kundali</button>
+                <button class="tab-btn" data-tab="predictions">Predictions</button>
+                <button class="tab-btn" data-tab="compatibility">Compatibility</button>
+                <button class="tab-btn" data-tab="dreams">Dreams</button>
+            </div>
+            
+            <div class="tab-content active" id="overview-tab">
+                <div class="profile-summary">
+                    <div class="summary-card animated fadeInLeft">
+                        <div class="summary-icon">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                        <div class="summary-text">
+                            <h3>Zodiac Sign</h3>
+                            <p id="zodiac-sign">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card animated fadeInLeft delay-1">
+                        <div class="summary-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <div class="summary-text">
+                            <h3>Nakshatra</h3>
+                            <p id="nakshatra">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card animated fadeInLeft delay-2">
+                        <div class="summary-icon">
+                            <i class="fas fa-hashtag"></i>
+                        </div>
+                        <div class="summary-text">
+                            <h3>Life Path Number</h3>
+                            <p id="life-path">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="summary-card animated fadeInLeft delay-3">
+                        <div class="summary-icon">
+                            <i class="fas fa-om"></i>
+                        </div>
+                        <div class="summary-text">
+                            <h3>Lagna</h3>
+                            <p id="lagna">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="planetary-positions animated fadeInRight">
+                    <h3><i class="fas fa-globe-asia"></i> Planetary Positions</h3>
+                    <div class="planets-grid" id="planets-grid">
+                        <!-- Planets will be inserted here -->
+                    </div>
+                </div>
+                
+                <div class="aspects-section animated fadeInUp">
+                    <h3><i class="fas fa-star-and-crescent"></i> Current Aspects</h3>
+                    <div class="aspects-list" id="aspects-list">
+                        <!-- Aspects will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="kundali-tab">
+                <h3><i class="fas fa-chart-pie"></i> Your Kundali Chart</h3>
+                <div class="kundali-container">
+                    <div class="kundali-chart" id="kundali-chart">
+                        <!-- Kundali chart will be inserted here -->
+                    </div>
+                    
+                    <div class="kundali-details">
+                        <div class="detail-card">
+                            <h4>Tithi</h4>
+                            <p id="tithi">Loading...</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Yoga</h4>
+                            <p id="yoga">Loading...</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Karana</h4>
+                            <p id="karana">Loading...</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Birth Time</h4>
+                            <p id="birth-time">Loading...</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Birth Place</h4>
+                            <p id="birth-place">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="kundali-analysis animated fadeInUp">
+                    <h3><i class="fas fa-book-open"></i> Kundali Analysis</h3>
+                    <div class="analysis-text" id="kundali-analysis">
+                        <p>Loading your personalized kundali analysis...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="predictions-tab">
+                <div class="prediction-cards">
+                    <div class="prediction-card animated fadeInLeft">
+                        <div class="prediction-header">
+                            <i class="fas fa-calendar-day"></i>
+                            <h3>Daily Prediction</h3>
+                        </div>
+                        <div class="prediction-body">
+                            <p id="daily-prediction">Loading...</p>
+                            <div class="prediction-footer">
+                                <span class="prediction-date" id="daily-date"></span>
+                                <span class="prediction-lucky">
+                                    <i class="fas fa-clover"></i> Lucky Number: <span id="lucky-number"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-card animated fadeInRight">
+                        <div class="prediction-header">
+                            <i class="fas fa-calendar-week"></i>
+                            <h3>Weekly Highlights</h3>
+                        </div>
+                        <div class="prediction-body">
+                            <ul id="weekly-prediction">
+                                <li>Loading weekly predictions...</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-card animated fadeInLeft">
+                        <div class="prediction-header">
+                            <i class="fas fa-calendar-month"></i>
+                            <h3>Monthly Forecast</h3>
+                        </div>
+                        <div class="prediction-body">
+                            <p id="monthly-prediction">Loading...</p>
+                            <div class="prediction-footer">
+                                <span class="prediction-date" id="monthly-date"></span>
+                                <span class="prediction-lucky">
+                                    <i class="fas fa-star"></i> Lucky Day: <span id="lucky-day"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="prediction-card animated fadeInRight">
+                        <div class="prediction-header">
+                            <i class="fas fa-calendar-year"></i>
+                            <h3>Yearly Overview</h3>
+                        </div>
+                        <div class="prediction-body">
+                            <p id="yearly-prediction">Loading...</p>
+                            <div class="prediction-footer">
+                                <span class="prediction-date" id="yearly-date"></span>
+                                <span class="prediction-lucky">
+                                    <i class="fas fa-gem"></i> Lucky Color: <span id="lucky-color"></span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="future-partner animated fadeInUp">
+                    <h3><i class="fas fa-heart"></i> Future Partner Prediction</h3>
+                    <div class="partner-profile">
+                        <div class="partner-image">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="partner-details">
+                            <h4 id="partner-zodiac">Zodiac Sign: Loading...</h4>
+                            <p id="partner-description">Based on your 7th house and Venus position, your ideal partner would be...</p>
+                            <div class="partner-traits" id="partner-traits">
+                                <!-- Traits will be inserted here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="compatibility-tab">
+                <div class="compatibility-intro animated fadeIn">
+                    <h3><i class="fas fa-people-arrows"></i> Compatibility Analysis</h3>
+                    <p>Enter details of another person to check your compatibility</p>
+                </div>
+                
+                <div class="compatibility-form animated fadeInUp">
+                    <form id="compatibility-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="other-name">Name</label>
+                                <input type="text" id="other-name" placeholder="Person's name">
+                            </div>
+                            <div class="form-group">
+                                <label for="other-birth-date">Date of Birth</label>
+                                <input type="date" id="other-birth-date">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="other-birth-time">Time of Birth (optional)</label>
+                                <input type="time" id="other-birth-time">
+                            </div>
+                            <div class="form-group">
+                                <label for="relationship-type">Relationship Type</label>
+                                <select id="relationship-type">
+                                    <option value="love">Romantic</option>
+                                    <option value="friendship">Friendship</option>
+                                    <option value="business">Business</option>
+                                    <option value="family">Family</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn-glow">
+                            <i class="fas fa-calculator"></i> Calculate Compatibility
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="compatibility-results" id="compatibility-results" style="display: none;">
+                    <h3>Compatibility Results</h3>
+                    <div class="compatibility-chart" id="compatibility-chart">
+                        <!-- Chart will be inserted here -->
+                    </div>
+                    
+                    <div class="compatibility-details">
+                        <div class="detail-card">
+                            <h4>Secret Message</h4>
+                            <p id="secret-message">Loading...</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Best Quality</h4>
+                            <p id="best-quality">Loading...</p>
+                        </div>
+                        <div class="detail-card">
+                            <h4>Challenge</h4>
+                            <p id="challenge">Loading...</p>
+                        </div>
+                    </div>
+                    
+                    <div class="compatibility-advice">
+                        <h4><i class="fas fa-lightbulb"></i> Cosmic Advice</h4>
+                        <p id="cosmic-advice">Loading...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="dreams-tab">
+                <div class="dream-intro animated fadeIn">
+                    <h3><i class="fas fa-cloud-moon"></i> Dream Interpretation</h3>
+                    <p>Dreams are messages from your subconscious. Share your dream and get astrological interpretation.</p>
+                </div>
+                
+                <div class="dream-form animated fadeInUp">
+                    <form id="dream-form">
+                        <div class="form-group">
+                            <label for="dream-text">Describe Your Dream</label>
+                            <textarea id="dream-text" rows="5" placeholder="I had a dream about..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="dream-date">Date of Dream (optional)</label>
+                            <input type="date" id="dream-date">
+                        </div>
+                        <div class="form-group">
+                            <label for="dream-emotion">Primary Emotion in Dream</label>
+                            <select id="dream-emotion">
+                                <option value="fear">Fear</option>
+                                <option value="joy">Joy</option>
+                                <option value="sadness">Sadness</option>
+                                <option value="anger">Anger</option>
+                                <option value="surprise">Surprise</option>
+                                <option value="confusion">Confusion</option>
+                                <option value="love">Love</option>
+                                <option value="peace">Peace</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn-glow">
+                            <i class="fas fa-magic"></i> Interpret Dream
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="dream-results" id="dream-results" style="display: none;">
+                    <h3>Dream Interpretation</h3>
+                    <div class="dream-symbols">
+                        <h4><i class="fas fa-search"></i> Symbols Found</h4>
+                        <ul id="symbols-list">
+                            <!-- Symbols will be inserted here -->
+                        </ul>
+                    </div>
+                    
+                    <div class="dream-meaning">
+                        <h4><i class="fas fa-book"></i> Astrological Meaning</h4>
+                        <p id="dream-meaning-text">Loading...</p>
+                    </div>
+                    
+                    <div class="dream-advice">
+                        <h4><i class="fas fa-lightbulb"></i> Cosmic Guidance</h4>
+                        <p id="dream-advice-text">Loading...</p>
+                    </div>
+                </div>
+                
+                <div class="dream-dictionary animated fadeInUp">
+                    <h3><i class="fas fa-book-open"></i> Common Dream Symbols</h3>
+                    <div class="symbols-grid">
+                        <div class="symbol-card">
+                            <h4>Water</h4>
+                            <p>Represents emotions and subconscious mind</p>
+                        </div>
+                        <div class="symbol-card">
+                            <h4>Flying</h4>
+                            <p>Desire for freedom or escape from problems</p>
+                        </div>
+                        <div class="symbol-card">
+                            <h4>Teeth Falling</h4>
+                            <p>Anxiety about appearance or communication</p>
+                        </div>
+                        <div class="symbol-card">
+                            <h4>Being Chased</h4>
+                            <p>Avoiding a problem or fear in waking life</p>
+                        </div>
+                        <div class="symbol-card">
+                            <h4>Death</h4>
+                            <p>Signifies transformation or change</p>
+                        </div>
+                        <div class="symbol-card">
+                            <h4>House</h4>
+                            <p>Represents your sense of self</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="results-actions animated fadeInUp">
+                <button class="btn-glow" id="save-results">
+                    <i class="fas fa-save"></i> Save Results
+                </button>
+                <button class="btn-glow" id="share-results">
+                    <i class="fas fa-share-alt"></i> Share
+                </button>
+                <button class="btn-glow" id="chat-about-results">
+                    <i class="fas fa-robot"></i> Chat About Results
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            const now = new Date();
+            document.getElementById('current-date').textContent = now.toLocaleDateString('en-US', { 
+                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+            });
+            
+            // Tab functionality
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons and tabs
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    document.querySelectorAll('.tab-content').forEach(tab => {
+                        tab.classList.remove('active');
+                    });
+                    
+                    // Add active class to clicked button and corresponding tab
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Load sample data (in a real app, this would come from the server)
+            setTimeout(() => {
+                loadSampleData();
+            }, 1000);
+            
+            // Compatibility form submission
+            document.getElementById('compatibility-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                calculateCompatibility();
+            });
+            
+            // Dream form submission
+            document.getElementById('dream-form').addEventListener('submit', function(e) {
+                e.preventDefault();
+                interpretDream();
+            });
+            
+            // Button actions
+            document.getElementById('save-results').addEventListener('click', function() {
+                alert('Results saved to your profile!');
+            });
+            
+            document.getElementById('share-results').addEventListener('click', function() {
+                alert('Sharing options would appear here!');
+            });
+            
+            document.getElementById('chat-about-results').addEventListener('click', function() {
+                window.location.href = '/chat';
+            });
+        });
+        
+        function loadSampleData() {
+            // Sample data - in a real app this would come from the server
+            const sampleData = {
+                zodiacSign: "Leo",
+                nakshatra: "Purva Phalguni",
+                lifePath: 5,
+                lagna: "Simha",
+                tithi: "Shukla Paksha Navami",
+                yoga: "Siddha",
+                karana: "Kaulava",
+                birthTime: "10:30 AM",
+                birthPlace: "Kathmandu, Nepal",
+                dailyPrediction: "Today, the Sun's position illuminates your creative potential. It's an excellent day to showcase your talents and take the lead in projects. Unexpected financial opportunities may arise in the afternoon.",
+                dailyDate: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
+                luckyNumber: Math.floor(Math.random() * 9) + 1,
+                weeklyPrediction: [
+                    "Monday: Focus on communication - important messages arrive",
+                    "Wednesday: Financial matters need attention",
+                    "Friday: Social opportunities bring joy",
+                    "Sunday: Time for rest and reflection"
+                ],
+                monthlyPrediction: "This month brings a focus on career and public image. Jupiter's transit suggests recognition for your efforts, while Mercury retrograde mid-month warns to double-check all communications. The last week brings a romantic opportunity for singles.",
+                monthlyDate: new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' }),
+                luckyDay: Math.floor(Math.random() * 30) + 1,
+                yearlyPrediction: "This year marks a turning point in your personal growth. Saturn's influence brings necessary challenges that ultimately strengthen your character. Jupiter's blessings come in the form of travel opportunities or higher education. Relationships deepen, especially after August.",
+                yearlyDate: new Date().getFullYear(),
+                luckyColor: ["Red", "Gold", "Orange", "White"][Math.floor(Math.random() * 4)],
+                partnerZodiac: ["Libra", "Sagittarius", "Aries", "Gemini"][Math.floor(Math.random() * 4)],
+                partnerDescription: "Your future partner will likely be charismatic and social, with strong communication skills. They may be involved in creative fields or leadership roles. The relationship will be dynamic with plenty of intellectual stimulation.",
+                partnerTraits: [
+                    "Good communicator",
+                    "Social and outgoing",
+                    "Creative mindset",
+                    "Strong leadership qualities",
+                    "Appreciates luxury"
+                ],
+                planetaryPositions: {
+                    "Sun": "Leo",
+                    "Moon": "Cancer",
+                    "Mercury": "Virgo",
+                    "Venus": "Libra",
+                    "Mars": "Aries",
+                    "Jupiter": "Sagittarius",
+                    "Saturn": "Capricorn",
+                    "Uranus": "Taurus",
+                    "Neptune": "Pisces",
+                    "Pluto": "Scorpio",
+                    "Rahu": "Gemini",
+                    "Ketu": "Sagittarius"
+                },
+                aspects: [
+                    "Sun trine Moon - Emotional harmony",
+                    "Mercury square Mars - Quick thinking but impulsive speech",
+                    "Venus conjunct Jupiter - Abundance in love and creativity",
+                    "Saturn opposite Moon - Emotional discipline needed"
+                ],
+                kundaliAnalysis: "Your kundali shows a strong 1st house with Sun in Leo, indicating a powerful personality and leadership qualities. Moon in Cancer suggests emotional depth and strong intuition. The 10th house is activated by Saturn, showing career success through hard work. Rahu in the 3rd house indicates talent in communication fields."
+            };
+            
+            // Populate the data
+            document.getElementById('zodiac-sign').textContent = sampleData.zodiacSign;
+            document.getElementById('nakshatra').textContent = sampleData.nakshatra;
+            document.getElementById('life-path').textContent = sampleData.lifePath;
+            document.getElementById('lagna').textContent = sampleData.lagna;
+            document.getElementById('tithi').textContent = sampleData.tithi;
+            document.getElementById('yoga').textContent = sampleData.yoga;
+            document.getElementById('karana').textContent = sampleData.karana;
+            document.getElementById('birth-time').textContent = sampleData.birthTime;
+            document.getElementById('birth-place').textContent = sampleData.birthPlace;
+            document.getElementById('daily-prediction').textContent = sampleData.dailyPrediction;
+            document.getElementById('daily-date').textContent = sampleData.dailyDate;
+            document.getElementById('lucky-number').textContent = sampleData.luckyNumber;
+            
+            const weeklyList = document.getElementById('weekly-prediction');
+            weeklyList.innerHTML = '';
+            sampleData.weeklyPrediction.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = item;
+                weeklyList.appendChild(li);
+            });
+            
+            document.getElementById('monthly-prediction').textContent = sampleData.monthlyPrediction;
+            document.getElementById('monthly-date').textContent = sampleData.monthlyDate;
+            document.getElementById('lucky-day').textContent = sampleData.luckyDay;
+            document.getElementById('yearly-prediction').textContent = sampleData.yearlyPrediction;
+            document.getElementById('yearly-date').textContent = sampleData.yearlyDate;
+            document.getElementById('lucky-color').textContent = sampleData.luckyColor;
+            document.getElementById('partner-zodiac').textContent = `Zodiac Sign: ${sampleData.partnerZodiac}`;
+            document.getElementById('partner-description').textContent = sampleData.partnerDescription;
+            
+            const traitsList = document.getElementById('partner-traits');
+            traitsList.innerHTML = '';
+            sampleData.partnerTraits.forEach(trait => {
+                const div = document.createElement('div');
+                div.className = 'trait-item';
+                div.innerHTML = `<i class="fas fa-check"></i> ${trait}`;
+                traitsList.appendChild(div);
+            });
+            
+            const planetsGrid = document.getElementById('planets-grid');
+            planetsGrid.innerHTML = '';
+            Object.entries(sampleData.planetaryPositions).forEach(([planet, sign]) => {
+                const planetDiv = document.createElement('div');
+                planetDiv.className = 'planet-item';
+                planetDiv.innerHTML = `
+                    <div class="planet-name">${planet}</div>
+                    <div class="planet-sign">${sign}</div>
+                `;
+                planetsGrid.appendChild(planetDiv);
+            });
+            
+            const aspectsList = document.getElementById('aspects-list');
+            aspectsList.innerHTML = '';
+            sampleData.aspects.forEach(aspect => {
+                const aspectDiv = document.createElement('div');
+                aspectDiv.className = 'aspect-item';
+                aspectDiv.innerHTML = `<i class="fas fa-star"></i> ${aspect}`;
+                aspectsList.appendChild(aspectDiv);
+            });
+            
+            document.getElementById('kundali-analysis').innerHTML = `<p>${sampleData.kundaliAnalysis}</p>`;
+            
+            // Generate charts
+            generateKundaliChart({
+                lagna: sampleData.lagna,
+                nakshatra: sampleData.nakshatra,
+                planetary_positions: sampleData.planetaryPositions,
+                tithi: sampleData.tithi,
+                yoga: sampleData.yoga,
+                karana: sampleData.karana,
+                rasi_names: {
+                    "Mesha": "Aries", "Vrishabha": "Taurus", "Mithuna": "Gemini",
+                    "Karka": "Cancer", "Simha": "Leo", "Kanya": "Virgo",
+                    "Tula": "Libra", "Vrishchika": "Scorpio", "Dhanu": "Sagittarius",
+                    "Makara": "Capricorn", "Kumbha": "Aquarius", "Meena": "Pisces"
+                }
+            });
+        }
+        
+        function calculateCompatibility() {
+            // Show loading state
+            const form = document.getElementById('compatibility-form');
+            const btn = form.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Calculating...';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Sample compatibility data
+                const compatibilityData = {
+                    compatibility: {
+                        love: Math.floor(Math.random() * 40) + 60, // 60-99
+                        trust: Math.floor(Math.random() * 30) + 60, // 60-89
+                        communication: Math.floor(Math.random() * 50) + 50, // 50-99
+                        friendship: Math.floor(Math.random() * 40) + 60, // 60-99
+                        marriage: Math.floor(Math.random() * 50) + 40 // 40-89
+                    },
+                    secretMessage: "The stars whisper that your connection has karmic significance from a past life.",
+                    bestQuality: "Your ability to communicate openly and honestly",
+                    challenge: "Different approaches to emotional expression",
+                    cosmicAdvice: "Focus on building trust through consistent actions. Your differences can become strengths if you appreciate what each brings to the relationship."
+                };
+                
+                // Display results
+                document.getElementById('compatibility-results').style.display = 'block';
+                document.getElementById('secret-message').textContent = compatibilityData.secretMessage;
+                document.getElementById('best-quality').textContent = compatibilityData.bestQuality;
+                document.getElementById('challenge').textContent = compatibilityData.challenge;
+                document.getElementById('cosmic-advice').textContent = compatibilityData.cosmicAdvice;
+                
+                // Generate chart
+                generateCompatibilityChart(compatibilityData);
+                
+                // Reset button
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-calculator"></i> Calculate Compatibility';
+                
+                // Scroll to results
+                document.getElementById('compatibility-results').scrollIntoView({ behavior: 'smooth' });
+            }, 2000);
+        }
+        
+        function interpretDream() {
+            // Show loading state
+            const form = document.getElementById('dream-form');
+            const btn = form.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Interpreting...';
+            
+            const dreamText = document.getElementById('dream-text').value;
+            const emotion = document.getElementById('dream-emotion').value;
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Sample interpretation
+                const symbols = [];
+                if (dreamText.toLowerCase().includes('water')) symbols.push("Water: Emotions and subconscious mind");
+                if (dreamText.toLowerCase().includes('fly')) symbols.push("Flying: Desire for freedom");
+                if (dreamText.toLowerCase().includes('teeth')) symbols.push("Teeth: Anxiety about appearance");
+                if (dreamText.toLowerCase().includes('chase')) symbols.push("Being chased: Avoiding a problem");
+                if (symbols.length === 0) symbols.push("The dream contains hidden symbols that need deeper analysis");
+                
+                const emotionMeanings = {
+                    "fear": "indicates unresolved anxieties coming to surface",
+                    "joy": "reflects contentment and positive energy in your life",
+                    "sadness": "suggests healing is needed in some area",
+                    "anger": "points to repressed feelings needing expression",
+                    "surprise": "shows unexpected changes coming",
+                    "confusion": "reflects uncertainty in waking life",
+                    "love": "indicates emotional fulfillment or desire",
+                    "peace": "shows inner harmony and balance"
+                };
+                
+                const interpretations = [
+                    "The Moon's current phase suggests this dream carries important messages about your emotional state.",
+                    "Mercury's position indicates this dream relates to communication issues or decisions needing attention.",
+                    "With Neptune prominent in your chart, this dream likely has spiritual significance.",
+                    "The planetary alignments suggest this dream is highlighting an area of your life needing change.",
+                    "Your current transits indicate this dream is preparing you for upcoming challenges."
+                ];
+                
+                const advice = [
+                    "Pay attention to similar themes in your waking life this week.",
+                    "Keep a dream journal to track recurring symbols and patterns.",
+                    "Meditate on the emotions from this dream to gain clarity.",
+                    "Share this dream with a trusted friend for additional perspective.",
+                    "Consider how the dream symbols might relate to current life situations."
+                ];
+                
+                // Display results
+                document.getElementById('dream-results').style.display = 'block';
+                
+                const symbolsList = document.getElementById('symbols-list');
+                symbolsList.innerHTML = '';
+                symbols.forEach(symbol => {
+                    const li = document.createElement('li');
+                    li.textContent = symbol;
+                    symbolsList.appendChild(li);
+                });
+                
+                document.getElementById('dream-meaning-text').textContent = 
+                    `Your dream's primary emotion (${emotion}) ${emotionMeanings[emotion]}. ${interpretations[Math.floor(Math.random() * interpretations.length)]}`;
+                
+                document.getElementById('dream-advice-text').textContent = 
+                    advice[Math.floor(Math.random() * advice.length)];
+                
+                // Reset button
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-magic"></i> Interpret Dream';
+                
+                // Scroll to results
+                document.getElementById('dream-results').scrollIntoView({ behavior: 'smooth' });
+            }, 1500);
+        }
+    </script>
+</body>
+</html>

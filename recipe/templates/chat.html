@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with Astro AI | Horoscope To Future</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/animations.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="animated fadeInDown">
+            <div class="logo">
+                <i class="fas fa-robot"></i>
+                <h1>Astro AI</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/home"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#" class="active"><i class="fas fa-comments"></i> Chat</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <main class="chat-container">
+            <div class="chat-sidebar animated fadeInLeft">
+                <div class="chat-profile">
+                    <div class="profile-image">
+                        <img src="/static/images/astro-ai.png" alt="Astro AI">
+                        <span class="online-status"></span>
+                    </div>
+                    <div class="profile-info">
+                        <h3>Astro AI</h3>
+                        <p>Your Personal Astrology Guide</p>
+                    </div>
+                </div>
+                
+                <div class="chat-options">
+                    <h4>Quick Questions</h4>
+                    <ul>
+                        <li><button class="quick-question" data-question="Tell me about today's horoscope">Today's Horoscope</button></li>
+                        <li><button class="quick-question" data-question="What's my lucky color today?">Lucky Color</button></li>
+                        <li><button class="quick-question" data-question="How are my finances looking this month?">Finances</button></li>
+                        <li><button class="quick-question" data-question="What about my love life?">Love Life</button></li>
+                        <li><button class="quick-question" data-question="Any career advice?">Career</button></li>
+                    </ul>
+                    
+                    <h4>Chat Topics</h4>
+                    <ul>
+                        <li><button class="topic-btn" data-topic="daily">Daily Predictions</button></li>
+                        <li><button class="topic-btn" data-topic="monthly">Monthly Forecast</button></li>
+                        <li><button class="topic-btn" data-topic="compatibility">Compatibility</button></li>
+                        <li><button class="topic-btn" data-topic="dreams">Dream Interpretation</button></li>
+                        <li><button class="topic-btn" data-topic="kundali">Kundali Analysis</button></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="chat-main animated fadeInRight">
+                <div class="chat-header">
+                    <h2><i class="fas fa-star"></i> Astro AI Chat</h2>
+                    <p>Ask me anything about your horoscope, dreams, or future</p>
+                </div>
+                
+                <div class="chat-messages" id="chat-messages">
+                    <!-- Messages will be inserted here -->
+                </div>
+                
+                <div class="chat-input">
+                    <textarea id="message-input" placeholder="Type your message here..."></textarea>
+                    <button id="send-btn"><i class="fas fa-paper-plane"></i> Send</button>
+                    <button id="voice-btn"><i class="fas fa-microphone"></i></button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const chatMessages = document.getElementById('chat-messages');
+            const messageInput = document.getElementById('message-input');
+            const sendBtn = document.getElementById('send-btn');
+            const voiceBtn = document.getElementById('voice-btn');
+            const quickQuestions = document.querySelectorAll('.quick-question');
+            const topicBtns = document.querySelectorAll('.topic-btn');
+            
+            // Initial AI greeting
+            addAIMessage("Hello! I'm Astro AI, your personal astrology guide. How can I help you today? You can ask about your horoscope, dreams, or future predictions. Or select one of the quick questions to get started!");
+            
+            // Send message function
+            function sendMessage() {
+                const message = messageInput.value.trim();
+                if (message) {
+                    addUserMessage(message);
+                    messageInput.value = '';
+                    
+                    // Simulate AI response after a delay
+                    setTimeout(() => {
+                        generateAIResponse(message);
+                    }, 1000);
+                }
+            }
+            
+            // Add user message to chat
+            function addUserMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message user-message animated fadeInRight';
+                messageDiv.innerHTML = `
+                    <div class="message-content">
+                        <div class="message-text">${text}</div>
+                        <div class="message-time">${getCurrentTime()}</div>
+                    </div>
+                    <div class="message-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                `;
+                chatMessages.appendChild(messageDiv);
+                scrollToBottom();
+            }
+            
+            // Add AI message to chat
+            function addAIMessage(text) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'message ai-message animated fadeInLeft';
+                messageDiv.innerHTML = `
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <div class="message-text">${text}</div>
+                        <div class="message-time">${getCurrentTime()}</div>
+                    </div>
+                `;
+                chatMessages.appendChild(messageDiv);
+                scrollToBottom();
+            }
+            
+            // Generate AI response based on user input
+            function generateAIResponse(userMessage) {
+                let response = "";
+                const lowerMsg = userMessage.toLowerCase();
+                
+                if (lowerMsg.includes('hello') || lowerMsg.includes('hi') || lowerMsg.includes('hey')) {
+                    response = "Hello again! What would you like to know about your stars today?";
+                } 
+                else if (lowerMsg.includes('horoscope') || lowerMsg.includes('prediction')) {
+                    response = "Based on your birth chart, today brings opportunities for personal growth. The Moon's position suggests it's a good day for emotional reflection and connecting with loved ones.";
+                }
+                else if (lowerMsg.includes('color') || lowerMsg.includes('lucky')) {
+                    const colors = ["red", "blue", "green", "yellow", "white", "purple", "pink"];
+                    response = `Your lucky color today is ${colors[Math.floor(Math.random() * colors.length)]}. Wearing this color will enhance your positive energies.`;
+                }
+                else if (lowerMsg.includes('finance') || lowerMsg.includes('money')) {
+                    response = "Jupiter's current transit indicates potential financial gains, but Saturn's aspect suggests caution with investments. Avoid major purchases today, but small financial opportunities may arise tomorrow.";
+                }
+                else if (lowerMsg.includes('love') || lowerMsg.includes('relationship')) {
+                    response = "Venus in your 7th house suggests romantic energies are strong. If single, you might meet someone interesting soon. If in a relationship, it's a good time for deep conversations.";
+                }
+                else if (lowerMsg.includes('career') || lowerMsg.includes('job')) {
+                    response = "Mars energizing your 10th house indicates progress in career matters. This is a favorable time to take initiative or discuss promotions. Mid-week brings important career-related news.";
+                }
+                else if (lowerMsg.includes('dream') || lowerMsg.includes('interpret')) {
+                    response = "Dreams are messages from your subconscious. Common symbols: Water represents emotions, flying indicates desire for freedom, teeth often relate to anxiety. Would you like to share a recent dream?";
+                }
+                else {
+                    const randomResponses = [
+                        "That's an interesting question. Let me consult the stars...",
+                        "The planetary alignments suggest...",
+                        "According to your birth chart...",
+                        "I sense that...",
+                        "The cosmos reveals...",
+                        "Your horoscope indicates..."
+                    ];
+                    response = randomResponses[Math.floor(Math.random() * randomResponses.length)] + " " + 
+                              generateRandomAstrologyResponse();
+                }
+                
+                addAIMessage(response);
+            }
+            
+            function generateRandomAstrologyResponse() {
+                const planets = ["Sun", "Moon", "Mercury", "Venus", "Mars", "Jupiter", "Saturn"];
+                const aspects = ["conjunct", "trine", "square", "opposite", "sextile"];
+                const outcomes = [
+                    "brings positive energy to your endeavors",
+                    "suggests caution in financial matters",
+                    "indicates a time for reflection",
+                    "shows potential for new relationships",
+                    "warns against hasty decisions",
+                    "promises creative inspiration",
+                    "foretells unexpected news",
+                    "heralds a period of growth"
+                ];
+                
+                const planet = planets[Math.floor(Math.random() * planets.length)];
+                const aspect = aspects[Math.floor(Math.random() * aspects.length)];
+                const outcome = outcomes[Math.floor(Math.random() * outcomes.length)];
+                
+                return `The ${planet} is ${aspect} your natal Venus, which ${outcome}.`;
+            }
+            
+            function getCurrentTime() {
+                const now = new Date();
+                return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            }
+            
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+            
+            // Event listeners
+            sendBtn.addEventListener('click', sendMessage);
+            
+            messageInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+            
+            quickQuestions.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const question = this.getAttribute('data-question');
+                    messageInput.value = question;
+                    sendMessage();
+                });
+            });
+            
+            topicBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const topic = this.getAttribute('data-topic');
+                    let question = "";
+                    
+                    switch(topic) {
+                        case 'daily':
+                            question = "What does my daily horoscope say?";
+                            break;
+                        case 'monthly':
+                            question = "What's my monthly forecast?";
+                            break;
+                        case 'compatibility':
+                            question = "Can you analyze my compatibility with someone?";
+                            break;
+                        case 'dreams':
+                            question = "I had a dream about...";
+                            break;
+                        case 'kundali':
+                            question = "Can you explain my kundali?";
+                            break;
+                    }
+                    
+                    messageInput.value = question;
+                    sendMessage();
+                });
+            });
+            
+            // Voice recognition (simplified)
+            voiceBtn.addEventListener('click', function() {
+                addAIMessage("Voice input is not supported in this demo. Please type your message.");
+            });
+        });
+    </script>
+</body>
+</html>

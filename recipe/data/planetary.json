@@ -1,0 +1,86 @@
+{
+    "planets": {
+        "Sun": {
+            "symbol": "☉",
+            "meaning": "The core self, vitality, and life purpose",
+            "nepali_meaning": "आत्मा, जीवन शक्ति, र जीवनको उद्देश्य"
+        },
+        "Moon": {
+            "symbol": "☽",
+            "meaning": "Emotions, instincts, and subconscious",
+            "nepali_meaning": "भावना, प्रवृत्ति, र अवचेतन मन"
+        },
+        "Mercury": {
+            "symbol": "☿",
+            "meaning": "Communication, intellect, and reasoning",
+            "nepali_meaning": "संचार, बुद्धि, र तर्क"
+        },
+        "Venus": {
+            "symbol": "♀",
+            "meaning": "Love, beauty, and values",
+            "nepali_meaning": "प्रेम, सौन्दर्य, र मूल्यहरू"
+        },
+        "Mars": {
+            "symbol": "♂",
+            "meaning": "Energy, action, and desire",
+            "nepali_meaning": "ऊर्जा, कार्य, र इच्छा"
+        },
+        "Jupiter": {
+            "symbol": "♃",
+            "meaning": "Expansion, luck, and wisdom",
+            "nepali_meaning": "विस्तार, भाग्य, र ज्ञान"
+        },
+        "Saturn": {
+            "symbol": "♄",
+            "meaning": "Discipline, challenges, and karma",
+            "nepali_meaning": "अनुशासन, चुनौतीहरू, र कर्म"
+        },
+        "Uranus": {
+            "symbol": "♅",
+            "meaning": "Innovation, change, and rebellion",
+            "nepali_meaning": "नवीनता, परिवर्तन, र विद्रोह"
+        },
+        "Neptune": {
+            "symbol": "♆",
+            "meaning": "Dreams, intuition, and spirituality",
+            "nepali_meaning": "सपना, अन्तर्ज्ञान, र आध्यात्मिकता"
+        },
+        "Pluto": {
+            "symbol": "♇",
+            "meaning": "Transformation, power, and rebirth",
+            "nepali_meaning": "रूपान्तरण, शक्ति, र पुनर्जन्म"
+        },
+        "Rahu": {
+            "symbol": "☊",
+            "meaning": "Material desires and obsessions",
+            "nepali_meaning": "भौतिक इच्छा र आसक्ति"
+        },
+        "Ketu": {
+            "symbol": "☋",
+            "meaning": "Spiritual liberation and detachment",
+            "nepali_meaning": "आध्यात्मिक मुक्ति र वैराग्य"
+        }
+    },
+    "aspects": {
+        "conjunction": {
+            "meaning": "Planets combine their energies",
+            "nepali_meaning": "ग्रहहरूको ऊर्जा संयुक्त हुन्छ"
+        },
+        "sextile": {
+            "meaning": "Harmonious opportunity",
+            "nepali_meaning": "सामंजस्यपूर्ण अवसर"
+        },
+        "square": {
+            "meaning": "Challenge and tension",
+            "nepali_meaning": "चुनौती र तनाव"
+        },
+        "trine": {
+            "meaning": "Natural talent and ease",
+            "nepali_meaning": "प्राकृतिक प्रतिभा र सजिलो"
+        },
+        "opposition": {
+            "meaning": "Polarity needing balance",
+            "nepali_meaning": "सन्तुलन आवश्यक पार्ने ध्रुवीयता"
+        }
+    }
+}
